@@ -7,29 +7,38 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
+        stage('Compile') {
             steps {
-                git branch: 'main’, url: "https://github.com/adeahmed/FarToCel_Adeahmed"
+                echo 'Compiling...'
+                sh 'mvn compile'
             }
         }
-
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+                sh 'mvn test'
+            }
+        }
+        stage('Site') {
+            steps {
+                echo 'Generating site...'
+                sh 'mvn site'
+            }
+        }
         stage('Build') {
             steps {
+                echo 'Building...'
                 sh 'mvn clean install'
             }
         }
-
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-            post {
-                success {
-                    junit '*/target/surefire-reports/TEST-.xml'
-
-                    jacoco(execPattern: '**/target/jacoco.exec')
-                }
-            }
-        }
     }
-}
+    post {
+        always {
+            echo 'This will always run'
+        }
+        success {
+            echo 'Build succeeded!'
+        }
+        failure {
+            echo 'Build failed!'
+        }}
