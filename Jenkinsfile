@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        GITHUB_REPO = 'https://github.com/adeahmed/FarToCel_Adeahmed' '
+        GITHUB_REPO = 'https://github.com/adeahmed/FarToCel_Adeahmed'
     }
 
     tools {
