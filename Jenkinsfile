@@ -1,49 +1,39 @@
 pipeline {
     agent any
 
+    environment {
+        GITHUB_REPO = 'https://github.com/adeahmed/FarToCel_Adeahmed'
+    }
+
     tools {
         maven 'maven'
         jdk 'jdk'
     }
 
     stages {
-        stage('Compile') {
+        stage('Checkout') {
             steps {
-                echo 'Compiling...'
-                sh 'mvn compile'
+                git branch: 'main’, url: "https://github.com/adeahmed/FarToCel_Adeahmed"
             }
         }
-        stage('Test') {
-            steps {
-                echo 'Testing...'
-                sh 'mvn test'
-            }
-        }
-        stage('Site') {
-            steps {
-                echo 'Generating site...'
-                sh 'mvn site'
-            }
-        }
+
         stage('Build') {
             steps {
-                echo 'Building...'
                 sh 'mvn clean install'
             }
         }
-    }
-    post {
-        always {
-            echo 'This will always run'
-        }
-        success {
-            echo 'Build succeeded!'
-        }
-        failure {
-            echo 'Build failed!'
-        }
-        unstable {
-            echo 'Build unstable!'
+
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+            post {
+                success {
+                    junit '*/target/surefire-reports/TEST-.xml'
+
+                    jacoco(execPattern: '**/target/jacoco.exec')
+                }
+            }
         }
     }
 }
