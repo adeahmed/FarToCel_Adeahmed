@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 
 
 
-public class ConvertedTestAhmed     {
+public class ConverterTest   {
 
         @Test
         public void testToCelsius() {
