@@ -42,3 +42,8 @@ pipeline {
         failure {
             echo 'Build failed!'
         }
+        unstable {
+            echo 'Build unstable!'
+        }
+    }
+}
