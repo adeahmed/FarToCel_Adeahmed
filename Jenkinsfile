@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        GITHUB_REPO = 'https://github.com/adeahmed/FarToCel_Adeahmed'
-    }
-
     tools {
         maven 'maven'
         jdk 'jdk'
