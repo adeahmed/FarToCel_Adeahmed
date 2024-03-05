@@ -34,6 +34,15 @@ public class ConverterTest   {
 
             assertEquals(100.0, celsius, 0.001);
         }
+        
+        @Test
+        
+    public void testkelvinTofahrenthei(){
+            double fahrenheit = ConverterAhmed.KelvinToFahrenheit(300.1);
+            assertEquals(58.95, fahrenheit, 0.001);
+           
+        }
+    
     }
 
 

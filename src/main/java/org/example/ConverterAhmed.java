@@ -19,4 +19,10 @@ public class ConverterAhmed {
     public static double fahrenheitToCelsius(double fahrenheit) {
         return (fahrenheit - 32) * 5 / 9;
     }
+
+    public static double KelvinToFahrenheit(double kel) {
+
+        return ((kel - 273.15) * (9 / 5) + 32);
+    }
 }
+
